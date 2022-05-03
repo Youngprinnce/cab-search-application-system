@@ -4,6 +4,7 @@ import logger from './logger';
 import sendEmail from './email';
 import * as jwtManager from './tokenizer';
 import { sendSuccess, sendError, sendSuccessY } from './response-handler';
+import calculateHaversineDistance from './haversine';
 
 export {
   verifyEmail,
@@ -14,4 +15,5 @@ export {
   sendSuccess,
   sendError,
   sendSuccessY,
+  calculateHaversineDistance,
 };
