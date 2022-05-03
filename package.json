@@ -8,7 +8,8 @@
     "start": "node build/server.js",
     "prestart:dev": "rm -rf build",
     "dev": "nodemon --exec \"npm run build && npm run start\" --watch src -e ts,yaml,json",
-    "lint": "eslint . --ext .yaml --ext .ts --fix"
+    "lint": "eslint . --ext .yaml --ext .ts --fix",
+    "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 50000"
   },
   "keywords": [
     "cab",
