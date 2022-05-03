@@ -33,6 +33,7 @@ const config_1 = require("./config");
 const db_1 = __importDefault(require("./config/db"));
 // Routers
 const routes_1 = __importDefault(require("./api/routes"));
+const driver_routes_1 = __importDefault(require("./api/routes/driver.routes"));
 const app = (0, express_1.default)();
 // Initiate Database Connection
 (0, db_1.default)();
@@ -49,5 +50,6 @@ else {
 }
 // Routes
 app.use('/', routes_1.default);
+app.use('/api/v1', driver_routes_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map
