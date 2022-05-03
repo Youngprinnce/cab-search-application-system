@@ -36,6 +36,24 @@ class DriverClass {
     const driver = await Driver.create(this.data);
     return driver;
   }
+
+  async verify(): Promise<any> {
+    const { token } = this.data;
+    if (!token) return throwError('Token is required', 400);
+
+    const decoded = jwtManager.verify(token);
+
+    if (!decoded) return throwError('Invalid token', 401);
+
+    const driver = await Driver.findOne({ id: decoded.id, email: decoded.email });
+
+    if (!driver) return throwError('Invalid authentication details', 401);
+
+    driver.isVerified = true;
+
+    // eslint-disable-next-line no-return-await
+    return await driver.save();
+  }
 }
 
 export default DriverClass;

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import {
-  verifyEmail, jwtManager, throwError, sendSuccess, sendError,
+  verifyEmail, jwtManager, throwError, sendSuccess, sendError, sendSuccessY
 } from '../../utils';
 import Driver from '../services/driver.services';
 import * as validations from '../validations';
@@ -34,6 +34,17 @@ export const register = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     if (err.isJoi === true) return sendError(res, err.details[0].message, 422);
+    return sendError(res, err.message, err.statusCode || 500);
+  }
+};
+
+// Verify Driver email ===> /api/drivers/verify/:token
+export const verify = async (req: Request, res: Response) => {
+  try {
+    await new Driver(req.params).verify();
+
+    return sendSuccessY(res, 'Driver verified successfully', 200);
+  } catch (err: any) {
     return sendError(res, err.message, err.statusCode || 500);
   }
 };
