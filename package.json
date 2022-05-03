@@ -2,7 +2,7 @@
   "name": "cab-search-application",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server.js",
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "start": "node build/server.js",

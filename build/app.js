@@ -30,9 +30,12 @@ const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const config_1 = require("./config");
+const db_1 = __importDefault(require("./config/db"));
 // Routers
 const routes_1 = __importDefault(require("./api/routes"));
 const app = (0, express_1.default)();
+// Initiate Database Connection
+(0, db_1.default)();
 // Middlewares
 app.use((0, express_1.json)());
 app.use((0, express_1.urlencoded)({ extended: false }));

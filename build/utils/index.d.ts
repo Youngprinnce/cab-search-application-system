@@ -1,3 +1,4 @@
 import logger from './logger';
 import { sendSuccessY } from './response-handler';
-export { logger, sendSuccessY, };
+import throwError from './handle-error';
+export { logger, sendSuccessY, throwError, };
