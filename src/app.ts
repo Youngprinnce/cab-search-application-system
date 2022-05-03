@@ -50,7 +50,7 @@ app.use('/api/v1', cabRouter);
 // error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({
-    status: 'error',
+    status: 'failure',
     reason: err.message,
   });
 });

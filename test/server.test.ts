@@ -20,4 +20,19 @@ describe('Server', () => {
         done();
       });
   });
+
+  it('Should display Could not find the requested resource on the server!', (done) => {
+    chai
+      .request(app)
+      .post('/hello')
+      .end((err, res) => {
+        expect(res.status).to.be.eql(404);
+        expect(res.body).to.be.an('object');
+        expect(res.body.status).to.eql('failure');
+        expect(res.body.reason).to.eql(
+          'Could not find the requested resource on the server!',
+        );
+        done();
+      });
+  });
 });
