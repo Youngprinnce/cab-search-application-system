@@ -12,4 +12,9 @@ const driverSchema = Joi.object().keys({
   car_number: Joi.string().required(),
 });
 
-export { driverSchema };
+const locationSchema = Joi.object().keys({
+  latitude: Joi.number().min(-90).max(90).required(),
+  longitude: Joi.number().min(-180).max(180).required(),
+});
+
+export { driverSchema, locationSchema };

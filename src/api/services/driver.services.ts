@@ -1,5 +1,6 @@
 import Driver from '../models/driver.models';
 import { throwError, jwtManager } from '../../utils';
+import Location from '../models/location.models';
 
 class DriverClass {
   data: any;
@@ -53,6 +54,31 @@ class DriverClass {
 
     // eslint-disable-next-line no-return-await
     return await driver.save();
+  }
+
+  async sendLocation(): Promise<any> {
+    const driverId = this.data.driver_id;
+
+    const driverExist = await Driver.findOne({ id: driverId });
+
+    if (!driverExist) return throwError('Driver does not exist', 404);
+
+    const driverLocationExist = await Location.findOne({ driver_id: driverId });
+
+    const { latitude, longitude } = this.data;
+    if (!driverLocationExist) {
+      const location = new Location({
+        driver_id: driverId,
+        latitude,
+        longitude,
+      });
+      // eslint-disable-next-line no-return-await
+      return await location.save();
+    }
+    // eslint-disable-next-line no-return-await
+    return await Location.findOneAndUpdate({ driver_id: driverId }, {
+      latitude, longitude,
+    }, { new: true });
   }
 }
 

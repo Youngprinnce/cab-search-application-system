@@ -48,3 +48,22 @@ export const verify = async (req: Request, res: Response) => {
     return sendError(res, err.message, err.statusCode || 500);
   }
 };
+
+// Save driver location ===> /api/v1/drivers/location/:id
+export const sendLocation = async (req: Request, res: Response) => {
+  try {
+    await validations.driver.locationSchema.validateAsync(req.body);
+
+    const obj = {
+      driver_id: req.params.id,
+      ...req.body,
+    };
+
+    await new Driver(obj).sendLocation();
+
+    return sendSuccessY(res, 'Location saved successfully', 201);
+  } catch (err: any) {
+    if (err.isJoi === true) return sendError(res, err.details[0].message, 422);
+    return sendError(res, err.message, err.statusCode || 500);
+  }
+};
