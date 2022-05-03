@@ -1,9 +1,13 @@
-import express, { Application, json, urlencoded } from 'express';
+/* eslint-disable no-unused-vars */
+import express, {
+  Application, json, urlencoded, Request, Response, NextFunction,
+} from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, BASE_URL } from './config';
+import { NODE_ENV } from './config';
+import swaggerDefinition from './config/swagger';
 import InitiateMongoServer from './config/db';
 
 // Routers
@@ -13,27 +17,7 @@ import cabRouter from './api/routes/cab.routes';
 
 const app: Application = express();
 
-const swaggerDefinition = {
-  openapi: '3.0.3',
-  info: {
-    title: 'Cab Search Application System API documentation',
-    version: '1.0.0',
-    description: 'Cab Search API documentation',
-    contact: {
-      name: 'API Support',
-      email: 'ajiboyeadedotun16@gmail.com',
-    },
-  },
-  servers: [
-    {
-      url: `${BASE_URL}/api/v1`,
-      description: 'Development server',
-    },
-  ],
-};
-// options for the swagger docs
 const options = {
-  // import swaggerDefinitions
   swaggerDefinition,
   // path to the API docs
   apis: ['./src/docs/*.yaml'],
@@ -62,5 +46,21 @@ if (NODE_ENV === 'DEVELOPMENT') {
 app.use('/', baseRouter);
 app.use('/api/v1', driverRouter);
 app.use('/api/v1', cabRouter);
+
+// error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(500).json({
+    status: 'error',
+    reason: err.message,
+  });
+});
+
+// error handler for 404
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json({
+    status: 'failure',
+    reason: 'Could not find the requested resource on the server!',
+  });
+});
 
 export default app;

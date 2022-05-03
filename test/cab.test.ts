@@ -15,7 +15,6 @@ describe('post /cabs', () => {
         longitude: 36.821945,
       })
       .end((err, res) => {
-        console.log(res.body);
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal('success');
         done();

@@ -1,15 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose, { Schema } from 'mongoose';
-
-interface DriverModel extends mongoose.Document {
-    name: string;
-    email: string;
-    phone_number: number;
-    license_number: string;
-    car_number: string;
-    isVerified: boolean;
-    id: number;
-}
+import { DriverModel } from '../interfaces';
 
 const DriverSchema: Schema = new Schema({
   name: {
