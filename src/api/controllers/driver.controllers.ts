@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Request, Response } from 'express';
 import {
-  verifyEmail, jwtManager, throwError, sendSuccess, sendError, sendSuccessY
+  verifyEmail, jwtManager, throwError, sendSuccess, sendError, sendSuccessY,
 } from '../../utils';
 import Driver from '../services/driver.services';
 import * as validations from '../validations';

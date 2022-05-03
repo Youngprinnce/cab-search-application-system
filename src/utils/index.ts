@@ -13,5 +13,5 @@ export {
   jwtManager,
   sendSuccess,
   sendError,
-  sendSuccessY
+  sendSuccessY,
 };

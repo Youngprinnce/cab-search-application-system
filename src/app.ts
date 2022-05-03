@@ -10,7 +10,6 @@ import driverRouter from './api/routes/driver.routes';
 
 const app: Application = express();
 
-
 // Initiate Database Connection
 InitiateMongoServer();
 
