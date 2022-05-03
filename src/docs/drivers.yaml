@@ -1,0 +1,93 @@
+/drivers:
+  post:
+    tags: [Drivers]
+    description: Sign up a new driver
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [name, email, phone_number, car_number, license_number]
+            properties:
+              name:
+                type: string
+                example: foo
+                description: name of the driver
+              email:
+                type: string
+                example: foo@bar.com
+                description: email of the driver
+              phone_number:
+                type: number
+                example: 8154267564
+                description: phone number of the driver
+              car_number:
+                type: string
+                example: ABC-123ABC
+                description: car number of the driver
+              license_number:
+                type: string
+                example: ABC12345
+                description: mobile of the vendor
+    responses:
+      201:
+        description: The driver's account was created successfully
+      409:
+        description: The email or phone_number or car_number or license_number already exists
+      422:
+        description: Validations errors
+
+/drivers/verify/{token}:
+  get:
+    tags: [Drivers]
+    description: Verify email account
+    parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+        description: token to verify
+    responses:
+      200:
+        description: The email was verified successfully
+      401:
+        description: Unauthorized
+
+/drivers/location/{id}:
+  post:
+    tags: [Drivers]
+    description: Save driver's location
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: id of the driver
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [latitude, longitude]
+            properties:
+              latitude:
+                type: number
+                example: 12.345
+                description: latitude of the driver
+              longitude:
+                type: number
+                example: 78.912
+                description: longitude of the driver
+    responses:
+      201:
+        description: The driver's location was saved successfully
+      404:
+        description: The driver was not found
+      422:
+        description: Validations errors
+
+tags:
+  name: Drivers
+  description: The Driver's API

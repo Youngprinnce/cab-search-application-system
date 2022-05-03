@@ -1,0 +1,28 @@
+/cabs:
+  post:
+    tags: [Cabs]
+    description: Get available cabs within a 4km radius
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [latitude, longitude]
+            properties:
+              latitude:
+                type: number
+                example: 12.345
+                description: latitude of the driver
+              longitude:
+                type: number
+                example: 78.912
+                description: longitude of the driver
+    responses:
+      200:
+        description: The cabs were found successfully
+      422:
+        description: Validations errors
+
+tags:
+  name: Cabs
+  description: Cabs API
