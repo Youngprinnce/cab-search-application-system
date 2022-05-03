@@ -7,6 +7,7 @@ import InitiateMongoServer from './config/db';
 // Routers
 import baseRouter from './api/routes';
 import driverRouter from './api/routes/driver.routes';
+import cabRouter from './api/routes/cab.routes';
 
 const app: Application = express();
 
@@ -28,5 +29,6 @@ if (NODE_ENV === 'DEVELOPMENT') {
 // Routes
 app.use('/', baseRouter);
 app.use('/api/v1', driverRouter);
+app.use('/api/v1', cabRouter);
 
 export default app;
