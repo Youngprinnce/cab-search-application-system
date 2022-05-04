@@ -14,13 +14,13 @@ Cab Search Application System is a platform where drivers can register and updat
 ### Documentation
 - [Swagger](https://cab-search-app.herokuapp.com/docs)
 
-### How to setup project on your local machine
+### How to setup project on your local machine (Step 1)
 #### Pre-requisite
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.com/)
 - [Postman](https://www.getpostman.com/downloads/)
 
-#### Installing
+#### Installing 
 - Clone the repository
 - CD into the project folder
 - Rename .env.example to .env
@@ -40,3 +40,15 @@ Cab Search Application System is a platform where drivers can register and updat
 
 #### Run the linter
 - Run `npm run lint`
+
+### How to setup project on your local machine (Step 2) via docker
+#### Pre-requisite
+- [Docker](https://www.docker.com/)
+
+#### Installing
+- Download the docker image
+- Run `docker pull youngprinnce/cabsearchapp:latest`
+
+#### Run the app
+- Run `docker run -p 5000:5000 youngprinnce/cabsearchapp`
+
