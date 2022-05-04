@@ -22,7 +22,7 @@ class CabClass {
       const { latitude: cabLat, longitude: cabLong } = cabLocations[i];
       const distance = calculateHaversineDistance(latitude, longitude, cabLat, cabLong);
 
-      if (distance >= 4) {
+      if (distance <= 4) {
         // eslint-disable-next-line no-await-in-loop
         const cabArround = await Driver.findOne(
           { id: cabLocations[i].driver_id },
